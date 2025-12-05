@@ -1,36 +1,107 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 Autenticação Moderna com Better Auth, Next.js e Prisma
 
-## Getting Started
+Este projeto implementa um sistema de autenticação moderno utilizando **Better Auth**, integrando com **Next.js**, **Prisma ORM** e **PostgreSQL**.  
+O objetivo é criar uma base sólida, segura e tipada para aplicações que precisam de login, criação de conta, gerenciamento de sessão e proteção de rotas.
 
-First, run the development server:
+---
 
-```bash
+## 🛠 Tecnologias Utilizadas
+
+- **Next.js**
+- **TypeScript**
+- **Better Auth**
+- **Prisma ORM**
+- **PostgreSQL**
+- **Shadcn/UI** (caso esteja utilizando)
+- **Node.js**
+
+---
+
+## 📌 Funcionalidades
+
+- 🔐 Criação de conta  
+- 🔑 Login com Better Auth  
+- 🧭 Sessão persistida com cookies seguros  
+- 🔄 Logout  
+- 🧱 Rotas protegidas (server e client)  
+- 🗂 Integração com Prisma via Adaptador oficial  
+- ⚡ Tipagem automática no client e no server  
+
+---
+
+---
+
+## ⚙️ Configuração do Better Auth (Server)
+
+```ts
+import { betterAuth } from "better-auth";
+import { prisma } from "./prisma";
+import { prismaAdapter } from "better-auth/adapters/prisma";
+
+export const auth = betterAuth({
+  database: prismaAdapter(prisma, {
+    provider: "postgresql",
+  }),
+});
+
+💻 Configuração do Auth Client (Client)
+import { createAuthClient } from "better-auth/client";
+
+export const authClient = createAuthClient({
+  baseURL: "http://localhost:3000",
+});
+
+🗄️ Banco de Dados (Prisma)
+
+Antes de rodar o projeto, gere as tabelas:
+
+npx prisma generate
+npx prisma db push
+
+
+▶️ Como Rodar o Projeto
+
+Clone o repositório:
+
+git clone https://github.com/ismaeloliveira-projetos/Autentica-o-Moderna-com-Better-Auth-Next.js-Prisma-.git
+
+
+Instale as dependências:
+
+npm install
+# ou yarn install
+
+
+Configure o .env:
+
+DATABASE_URL="sua_url_do_postgres"
+
+
+Rodar o projeto:
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+🚀 Como Usar
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Acesse /api/auth para visualizar as rotas de autenticação.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Utilize authClient no front para login, logout e criação de usuários.
 
-## Learn More
+Use auth no server para proteger páginas ou recuperar sessões.
 
-To learn more about Next.js, take a look at the following resources:
+📘 Objetivo do Projeto
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Este repositório foi criado para servir como base de estudos e implementação prática de autenticação moderna, tipada e segura.
+Ideal para quem quer aprender:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Autenticação com Next.js 14
 
-## Deploy on Vercel
+Prisma ORM
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Better Auth
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Arquitetura de autenticação server-first
+
+📄 Licença
+
+Projeto livre para estudos e uso pessoal.
